@@ -59,7 +59,7 @@ jobs:
           version-file: go.mod
       - uses: KyleMayes/install-llvm-action@v2
         with:
-          version: 17.0.6
+          version: "17.0"
           arch: ${{ matrix.goarch == 'arm64' && 'arm64' || 'x64' }}
           env: true
       - name: Build
