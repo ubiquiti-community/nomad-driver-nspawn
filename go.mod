@@ -1,6 +1,6 @@
 module github.com/ubiquity-community/nomad-driver-nspawn
 
-go 1.22.5
+go 1.22
 
 // Fix error tidying due to Nomad downstream dependencies and the recent
 // migration of the metrics library.
