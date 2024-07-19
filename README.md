@@ -20,7 +20,7 @@ Nomad task.
 Checkout this repository and simply run `make`.
 
 ```shell
-$ git clone https://github.com/JanMa/nomad-driver-nspawn.git
+$ git clone https://github.com/ubiquity-community/nomad-driver-nspawn.git
 $ cd nomad-driver-nspawn
 $ make
 ```

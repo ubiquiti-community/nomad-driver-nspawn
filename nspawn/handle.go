@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/go-plugin"
 	"github.com/hashicorp/nomad/drivers/shared/executor"
 	"github.com/hashicorp/nomad/plugins/drivers"
@@ -19,8 +19,8 @@ var (
 )
 
 type taskHandle struct {
-	machine *MachineProps
-	logger  hclog.Logger
+	machine           *MachineProps
+	logger            hclog.Logger
 	networkInterfaces []string
 
 	// stateLock syncs access to all fields below

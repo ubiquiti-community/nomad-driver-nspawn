@@ -1,10 +1,10 @@
 package main
 
 import (
-	log "github.com/hashicorp/go-hclog"
-
-	"github.com/JanMa/nomad-driver-nspawn/nspawn"
+	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/nomad/plugins"
+
+	"github.com/ubiquity-community/nomad-driver-nspawn/nspawn"
 )
 
 func main() {
@@ -13,6 +13,6 @@ func main() {
 }
 
 // factory returns a new instance of the nspawn driver plugin
-func factory(log log.Logger) interface{} {
+func factory(log hclog.Logger) interface{} {
 	return nspawn.NewNspawnDriver(log)
 }
