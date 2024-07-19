@@ -6,10 +6,12 @@ go 1.22
 // migration of the metrics library.
 replace github.com/armon/go-metrics => github.com/hashicorp/go-metrics v0.5.3
 
+replace github.com/coreos/go-systemd => github.com/coreos/go-systemd/v22 v22.0.0
+
 require (
 	github.com/coreos/go-iptables v0.6.0
-	github.com/coreos/go-systemd v0.0.0-20191104093116-d3cd4ed1dbcf
-	github.com/godbus/dbus v4.1.0+incompatible
+	github.com/coreos/go-systemd/v22 v22.5.0
+	github.com/godbus/dbus/v5 v5.1.0
 	github.com/google/go-containerregistry v0.20.1
 	github.com/hashicorp/consul-template v0.37.4
 	github.com/hashicorp/go-hclog v1.6.3
@@ -40,7 +42,6 @@ require (
 	github.com/containerd/containerd v1.7.13 // indirect
 	github.com/containerd/log v0.1.0 // indirect
 	github.com/containerd/stargz-snapshotter/estargz v0.14.3 // indirect
-	github.com/coreos/go-systemd/v22 v22.5.0 // indirect
 	github.com/creack/pty v1.1.18 // indirect
 	github.com/cyphar/filepath-securejoin v0.2.4 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
@@ -55,7 +56,6 @@ require (
 	github.com/fsouza/go-dockerclient v1.10.1 // indirect
 	github.com/go-jose/go-jose/v3 v3.0.3 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
-	github.com/godbus/dbus/v5 v5.1.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/gojuno/minimock/v3 v3.0.6 // indirect
 	github.com/golang-jwt/jwt/v5 v5.0.0 // indirect

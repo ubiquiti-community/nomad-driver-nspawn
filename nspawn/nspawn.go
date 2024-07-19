@@ -19,11 +19,11 @@ import (
 	"github.com/google/go-containerregistry/pkg/v1/remote"
 
 	"github.com/coreos/go-iptables/iptables"
-	systemdDbus "github.com/coreos/go-systemd/dbus"
-	"github.com/coreos/go-systemd/import1"
-	"github.com/coreos/go-systemd/machine1"
-	systemdUtil "github.com/coreos/go-systemd/util"
-	"github.com/godbus/dbus"
+	systemdDbus "github.com/coreos/go-systemd/v22/dbus"
+	"github.com/coreos/go-systemd/v22/import1"
+	"github.com/coreos/go-systemd/v22/machine1"
+	systemdUtil "github.com/coreos/go-systemd/v22/util"
+	"github.com/godbus/dbus/v5"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/nomad/helper/pluginutils/hclutils"
 )
