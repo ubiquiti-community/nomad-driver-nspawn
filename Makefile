@@ -90,7 +90,7 @@ dist/%/nomad-driver-nspawn:
 	@echo "==> RELEASE BUILD of $@ ..."
 	CC=clang CXX=clang++ CGO_ENABLED=1 \
 	GOOS=linux GOARCH=$(lastword $(subst _, ,$*)) \
-	go build go build -a -v -o $(GO_OUT)
+	go build -a -v -o $(GO_OUT)
 
 # CRT release packaging (zip only)
 .PRECIOUS: dist/%/nomad-driver-nspawn
