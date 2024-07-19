@@ -3,7 +3,6 @@ package nspawn
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -11,7 +10,8 @@ import (
 	"time"
 
 	"github.com/hashicorp/consul-template/signals"
-	"github.com/hashicorp/go-hclog"
+	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/nomad/client/lib/cpustats"
 	"github.com/hashicorp/nomad/drivers/shared/eventer"
 	"github.com/hashicorp/nomad/drivers/shared/executor"
 	"github.com/hashicorp/nomad/helper/pluginutils/hclutils"
@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/nomad/plugins/drivers"
 	"github.com/hashicorp/nomad/plugins/shared/hclspec"
 
+	driversUtil "github.com/hashicorp/nomad/plugins/drivers/utils"
 	pstructs "github.com/hashicorp/nomad/plugins/shared/structs"
 )
 
@@ -143,6 +144,8 @@ type Driver struct {
 	// nomadConfig is the client config from nomad
 	nomadConfig *base.ClientDriverConfig
 
+	compute cpustats.Compute
+
 	// tasks is the in memory datastore mapping taskIDs to rawExecDriverHandles
 	tasks *taskStore
 
@@ -218,6 +221,7 @@ func (d *Driver) SetConfig(cfg *base.Config) error {
 	d.config = &config
 	if cfg.AgentConfig != nil {
 		d.nomadConfig = cfg.AgentConfig.Driver
+		d.compute = cfg.AgentConfig.Compute()
 	}
 
 	return nil
@@ -312,7 +316,7 @@ func (d *Driver) RecoverTask(handle *drivers.TaskHandle) error {
 		return fmt.Errorf("failed to build ReattachConfig from taskConfig state: %v", err)
 	}
 
-	execImpl, pluginClient, err := executor.ReattachToExecutor(plugRC, d.logger)
+	execImpl, pluginClient, err := executor.ReattachToExecutor(plugRC, d.logger, d.compute)
 	if err != nil {
 		return fmt.Errorf("failed to reattach to executor: %v", err)
 	}
@@ -567,7 +571,7 @@ func (d *Driver) StartTask(cfg *drivers.TaskConfig) (*drivers.TaskHandle, *drive
 		}
 
 		for _, l := range logs {
-			out, err := ioutil.ReadFile(l)
+			out, err := os.ReadFile(l)
 			if err != nil {
 				continue
 			}
