@@ -59,7 +59,7 @@ dev: clean build/nomad-driver-nspawn ## Build the nomad-driver-nspawn plugin
 build/nomad-driver-nspawn:
 	@echo "==> Building driver plugin ..."
 	mkdir -p build
-	CC=clang CXX=clang++ CGO_ENABLED=1 \
+	CGO_ENABLED=1 \
 	go build -a -v -o build/nomad-driver-nspawn .
 
 .PHONY: test
@@ -88,7 +88,7 @@ endif
 dist/%/nomad-driver-nspawn: GO_OUT ?= $@
 dist/%/nomad-driver-nspawn:
 	@echo "==> RELEASE BUILD of $@ ..."
-	CC=clang CXX=clang++ CGO_ENABLED=1 \
+	CGO_ENABLED=1 \
 	GOOS=linux GOARCH=$(lastword $(subst _, ,$*)) \
 	go build -a -v -o $(GO_OUT)
 
