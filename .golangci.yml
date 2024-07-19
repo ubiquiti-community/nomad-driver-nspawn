@@ -1,0 +1,69 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+run:
+  # Timeout for analysis
+  deadline: 10m
+
+  # Include test files
+  tests: true
+
+  # Skip directories
+  skip-dirs:
+    - iopodman
+    - build
+    - examples
+    - scripts
+
+# Output configuration
+output:
+  format: colored-line-number
+
+  # Print lines of code with issue
+  print-issued-lines: true
+
+  # Print linter name
+  print-linter-name: true
+
+# Specific linter settings
+linters-settings:
+  errcheck:
+    # Allow unchecked errors in type assertions
+    check-type-assertions: false
+
+  govet:
+    # Complain about shadowing
+    check-shadowing: true
+    settings:
+      shadow:
+        strict: false
+  gofmt:
+    # Complain about un-simplified code
+    simplify: true
+  maligned:
+    # Complain about non-minimized struct field alignment
+    suggest-new: true
+
+linters:
+  disable-all: true
+  enable:
+    - goimports
+    - gocritic
+    - misspell
+    - govet
+    - ineffassign
+    - unconvert
+    - gofmt
+    - gosimple
+    - depguard
+    - staticcheck
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - dogsled
+    - durationcheck
+    - errchkjson
+    - errorlint
+    - exportloopref
+  fast: false
