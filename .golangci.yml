@@ -8,13 +8,15 @@ run:
   # Include test files
   tests: true
 
-  # Skip directories
-  skip-dirs:
+issues:
+  exclude-dirs:
     - iopodman
     - build
     - examples
     - scripts
-
+  exclude-rules:
+    - text: 'shadow: declaration of "(err|ctx)" shadows declaration at'
+      linters: [govet]
 # Output configuration
 output:
   format: colored-line-number

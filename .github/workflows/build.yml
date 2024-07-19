@@ -9,19 +9,6 @@ env:
   PKG_NAME: "nomad-driver-nspawn"
 
 jobs:
-  get-go-version:
-    name: "Determine Go toolchain version"
-    runs-on: ubuntu-22.04
-    outputs:
-      go-version: ${{ steps.get-go-version.outputs.go-version }}
-    steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-      - name: Determine Go version
-        id: get-go-version
-        run: |
-          echo "Building with Go $(cat .go-version)"
-          echo "go-version=$(cat .go-version)" >> "$GITHUB_OUTPUT"
-
   get-product-version:
     runs-on: ubuntu-22.04
     outputs:
@@ -57,7 +44,6 @@ jobs:
 
   build-linux:
     needs:
-      - get-go-version
       - get-product-version
     runs-on: ubuntu-22.04
     strategy:
@@ -65,10 +51,12 @@ jobs:
         goos: [linux]
         goarch: ["arm64", "amd64"]
       fail-fast: false # recommended during development
-    name: Go ${{ needs.get-go-version.outputs.go-version }} ${{ matrix.goos }} ${{ matrix.goarch }} build
+    name: Go ${{ matrix.goos }} ${{ matrix.goarch }} build
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       - uses: hashicorp/setup-golang@v3
+        with:
+          version-file: go.mod
       - name: Build
         env:
           GOOS: ${{ matrix.goos }}
