@@ -57,6 +57,9 @@ jobs:
       - uses: hashicorp/setup-golang@v3
         with:
           version-file: go.mod
+      - uses: KyleMayes/install-llvm-action@v2
+        with:
+          version: 18.1.8
       - name: Build
         env:
           GOOS: ${{ matrix.goos }}
