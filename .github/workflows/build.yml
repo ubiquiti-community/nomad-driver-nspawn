@@ -59,7 +59,7 @@ jobs:
           version-file: go.mod
       - uses: KyleMayes/install-llvm-action@v2
         with:
-          version: 18.1.8
+          version: 18.1.4
       - name: Build
         env:
           GOOS: ${{ matrix.goos }}
